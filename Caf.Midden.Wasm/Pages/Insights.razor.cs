@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AntDesign.Charts;
-using Caf.Midden.Core.Models.v0_1;
+using Caf.Midden.Core.Models.v0_2;
 using System.Globalization;
 
 namespace Caf.Midden.Wasm.Pages
@@ -24,7 +24,7 @@ namespace Caf.Midden.Wasm.Pages
         DateTime CatalogLastUpdate { get; set; }
 
 
-        IChartComponent MetadataPerZone = new Column<object>();
+        IChartComponent MetadataPerZone = new Column();
         public object[] MetadataPerZoneData { get; set; }
         ColumnConfig MetadataPerZoneConfig = new ColumnConfig
         {
@@ -39,7 +39,7 @@ namespace Caf.Midden.Wasm.Pages
             YField = "count"
         };
 
-        IChartComponent DatasetsOverTime = new Area<object>();
+        IChartComponent DatasetsOverTime = new Area();
         public object[] DatasetsOverTimeData { get; set; }
         AreaConfig DatasetsOverTimeConfig = new AreaConfig
         {
