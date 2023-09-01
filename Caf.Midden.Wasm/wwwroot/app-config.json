@@ -37,6 +37,10 @@
     "Calculated",
     "Modeled"
   ],
+  "variableTypes": [
+    "Dimension",
+    "Metric"
+  ],
   "geometries": [
     {
       "name": "CookEast",
