@@ -23,13 +23,7 @@ jobs:
         with:
           dotnet-version: "10.0.x"
       - name: Publish Blazor WebAssembly App
-        run: dotnet publish Caf.Midden.Wasm/Caf.Midden.Wasm.csproj -c Release -o Caf.Midden.Wasm/release_output
-      - name: Debug - inspect publish output
-        run: |
-          echo "== Contents of Caf.Midden.Wasm/release_output =="
-          find Caf.Midden.Wasm/release_output -maxdepth 3
-          echo "== Looking for index.html =="
-          find Caf.Midden.Wasm/release_output -iname "index.html"
+        run: dotnet publish Caf.Midden.Wasm/Caf.Midden.Wasm.csproj -c Release
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -37,9 +31,10 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_DELIGHTFUL_GRASS_0EAAA8E1E }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
+          app_location: "Caf.Midden.Wasm/bin/Release/net10.0/publish/wwwroot"
           skip_app_build: true
-          app_location: "Caf.Midden.Wasm"
-          app_artifact_location: "release_output/wwwroot"
+          skip_api_build: true
+          production_branch: main
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
