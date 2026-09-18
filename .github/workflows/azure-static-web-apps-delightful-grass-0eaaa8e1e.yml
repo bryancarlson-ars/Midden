@@ -35,14 +35,21 @@ jobs:
           $versionPrefix = [string] $buildProperties.Project.PropertyGroup.VersionPrefix
           $prereleaseChannel = [string] $buildProperties.Project.PropertyGroup.PrereleaseChannel
 
-          $isRelease = $env:REF_TYPE -eq 'tag'
-          if ($isRelease) {
+          # Get a short 7-character commit hash for cleaner prerelease strings
+          $shortHash = if ($env:COMMIT_IDENTIFIER.Length -ge 7) { $env:COMMIT_IDENTIFIER.Substring(0, 7) } else { $env:COMMIT_IDENTIFIER }
+          
+          if ($env:REF_TYPE -eq 'tag') {
+              # If pushed via a Git tag, strip the 'v' and use a clean version
               $version = $env:REF_NAME.Substring(1)
           } else {
-              $channel = if ($prereleaseChannel) { $prereleaseChannel } else { 'dev' }
-              $version = "$versionPrefix-$channel.$env:COMMIT_IDENTIFIER"
+              # For develop or feature branches, use channel + short hash
+              $channel = if ($prereleaseChannel) { $prerelaseChannel } else { 'dev' }
+              # Fallback safety check if typo in channel variable name
+              if (-not $channel) { $channel = 'dev' }
+              $version = "$versionPrefix-$channel.$shortHash"
           }
           "version=$version" >> $env:GITHUB_OUTPUT
+          "Building Midden $version" >> $env:GITHUB_STEP_SUMMARY
 
   build_and_deploy_job:
     needs: metadata
