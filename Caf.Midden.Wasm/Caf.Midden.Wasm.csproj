@@ -7,9 +7,6 @@
 		<InvariantGlobalization>false</InvariantGlobalization>
 		<BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
 
-	<Version>1.0.0</Version>
-	<InformationalVersion>1.0.0-dev.3</InformationalVersion>
-
 	</PropertyGroup>
 
   <ItemGroup>
@@ -28,6 +25,12 @@
 
   <ItemGroup>
     <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\LICENSE.md" Link="wwwroot\legal\LICENSE.md" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\NOTICE.md" Link="wwwroot\legal\NOTICE.md" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\THIRD-PARTY-NOTICES.md" Link="wwwroot\legal\THIRD-PARTY-NOTICES.md" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>

@@ -2,13 +2,13 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <PackageId>MiddenCli</PackageId>
-    <Description>Command-line tool for cataloging data stores into a Midden catalog.</Description>
-    <PackageLicenseExpression>CC0-1.0</PackageLicenseExpression>
+    <Description>Command-line tool for aggregating project and dataset metadata from data stores into a Midden catalog.</Description>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/cafincubator/midden</RepositoryUrl>
     <AssemblyName>MiddenCli</AssemblyName>
     <PublishSingleFile>true</PublishSingleFile>
     <SelfContained>true</SelfContained>
-    <RuntimeIdentifiers>win-x64;linux-x64;osx-x64</RuntimeIdentifiers>
+    <RuntimeIdentifiers>win-x64;linux-x64;osx-x64;osx-arm64</RuntimeIdentifiers>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+      <InternalsVisibleTo Include="Caf.Midden.Cli.LiveTests" />
     <InternalsVisibleTo Include="Caf.Midden.Cli.Tests" />
   </ItemGroup>
 </Project>
