@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - develop
     tags:
       - "v*"
   pull_request:
@@ -41,9 +42,12 @@ jobs:
           if ($env:REF_TYPE -eq 'tag') {
               # If pushed via a Git tag, strip the 'v' and use a clean version
               $version = $env:REF_NAME.Substring(1)
+          } elseif ($env:REF_NAME -eq 'main') {
+              # If merged/pushed to main, use a clean version
+              $version = $versionPrefix
           } else {
               # For develop or feature branches, use channel + short hash
-              $channel = if ($prereleaseChannel) { $prerelaseChannel } else { 'dev' }
+              $channel = if ($prereleaseChannel) { $prereleaseChannel } else { 'dev' }
               # Fallback safety check if typo in channel variable name
               if (-not $channel) { $channel = 'dev' }
               $version = "$versionPrefix-$channel.$shortHash"
